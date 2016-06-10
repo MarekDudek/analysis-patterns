@@ -5,8 +5,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static java.lang.System.out;
-
 public class PayingToPartiesTest {
 
     abstract class Party {
@@ -14,8 +12,6 @@ public class PayingToPartiesTest {
         String account;
 
         void pay() {
-            if (account != null)
-                out.println(account);
         }
     }
 
