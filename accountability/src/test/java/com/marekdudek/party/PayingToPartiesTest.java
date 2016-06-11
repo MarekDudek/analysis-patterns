@@ -1,17 +1,27 @@
 package com.marekdudek.party;
 
+import com.marekdudek.utils.EventBus;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Observable;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertThat;
 
 public class PayingToPartiesTest {
 
-    abstract class Party {
+    abstract class Party extends Observable {
 
         String account;
 
         void pay() {
+            if (account != null) {
+                setChanged();
+                notifyObservers(account);
+            }
         }
     }
 
@@ -46,6 +56,16 @@ public class PayingToPartiesTest {
         final Collection<Party> payable = Arrays.asList(tomCairns, stMarys, renalUnit, parksideAuthority, rcp);
 
         // paying
+        payable.forEach(p -> p.addObserver(eventBus));
         payable.forEach(Party::pay);
+
+        assertThat(eventBus.events(), hasSize(4));
+    }
+
+    private EventBus eventBus;
+
+    @Before
+    public void setUp() {
+        eventBus = new EventBus();
     }
 }

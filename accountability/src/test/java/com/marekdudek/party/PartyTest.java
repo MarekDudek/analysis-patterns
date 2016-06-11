@@ -6,7 +6,7 @@ import java.util.Collection;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
-public class PartyTest {
+class PartyTest {
 
     public void parties() {
 
