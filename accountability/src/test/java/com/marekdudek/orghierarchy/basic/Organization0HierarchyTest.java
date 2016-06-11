@@ -8,7 +8,7 @@ import java.util.Collection;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
-public class OrganizationHierarchyTest {
+public class Organization0HierarchyTest {
 
     @Test
     public void generic_multinational() {
