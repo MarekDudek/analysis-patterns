@@ -1,4 +1,4 @@
-package com.marekdudek.party;
+package com.marekdudek.party.basic;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-class Address1 {
+class EmailAddress0 {
 
-    private final String address;
+    private final String email;
 }

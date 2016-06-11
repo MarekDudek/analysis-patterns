@@ -1,4 +1,4 @@
-package com.marekdudek.party;
+package com.marekdudek.party.another;
 
 import com.marekdudek.utils.EventBus;
 import org.junit.Before;
@@ -59,6 +59,7 @@ public class PayingToPartiesTest {
         payable.forEach(p -> p.addObserver(eventBus));
         payable.forEach(Party::pay);
 
+        // only having account are paid
         assertThat(eventBus.events(), hasSize(4));
     }
 

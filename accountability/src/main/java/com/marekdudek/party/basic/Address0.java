@@ -1,4 +1,4 @@
-package com.marekdudek.party;
+package com.marekdudek.party.basic;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-class TelephoneNumber1 {
+class Address0 {
 
-    private final String number;
+    private final String address;
 }

@@ -1,4 +1,6 @@
-package com.marekdudek.party;
+package com.marekdudek.party.generalized;
+
+import com.marekdudek.party.generalized.*;
 
 import java.util.Arrays;
 import java.util.Collection;

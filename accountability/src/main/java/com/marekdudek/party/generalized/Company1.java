@@ -1,4 +1,4 @@
-package com.marekdudek.party;
+package com.marekdudek.party.generalized;
 
 import lombok.ToString;
 
