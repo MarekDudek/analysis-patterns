@@ -1,14 +1,12 @@
 package com.marekdudek.party.generalized;
 
-import com.marekdudek.party.generalized.*;
-
 import java.util.Arrays;
 import java.util.Collection;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
-class PartyTest {
+public class PartyTest {
 
     public void parties() {
 
