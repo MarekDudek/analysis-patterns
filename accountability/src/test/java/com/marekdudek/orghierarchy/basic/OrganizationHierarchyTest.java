@@ -25,16 +25,6 @@ public class OrganizationHierarchyTest {
         final Division0 newEngland  = new Division0(northeast);
         final Division0 midAtlantic = new Division0(northeast);
 
-        final Division0 eastNorthCentral = new Division0(midwest);
-        final Division0 westNorthCentral = new Division0(midwest);
-
-        final Division0 southAtlantic    = new Division0(south);
-        final Division0 eastSouthCentral = new Division0(south);
-        final Division0 westSouthCentral = new Division0(south);
-
-        final Division0 mountain = new Division0(west);
-        final Division0 pacific  = new Division0(west);
-
         final SalesOffice0 connecticut   = new SalesOffice0(newEngland);
         final SalesOffice0 maine         = new SalesOffice0(newEngland);
         final SalesOffice0 massachusetts = new SalesOffice0(newEngland);
@@ -45,6 +35,9 @@ public class OrganizationHierarchyTest {
         final SalesOffice0 newJersey    = new SalesOffice0(midAtlantic);
         final SalesOffice0 newYork      = new SalesOffice0(midAtlantic);
         final SalesOffice0 pennsylvania = new SalesOffice0(midAtlantic);
+
+        final Division0 eastNorthCentral = new Division0(midwest);
+        final Division0 westNorthCentral = new Division0(midwest);
 
         final SalesOffice0 illinois  = new SalesOffice0(eastNorthCentral);
         final SalesOffice0 indiana   = new SalesOffice0(eastNorthCentral);
@@ -59,6 +52,10 @@ public class OrganizationHierarchyTest {
         final SalesOffice0 nebraska    = new SalesOffice0(westNorthCentral);
         final SalesOffice0 northDakota = new SalesOffice0(westNorthCentral);
         final SalesOffice0 southDakota = new SalesOffice0(westNorthCentral);
+
+        final Division0 southAtlantic    = new Division0(south);
+        final Division0 eastSouthCentral = new Division0(south);
+        final Division0 westSouthCentral = new Division0(south);
 
         final SalesOffice0 deleware      = new SalesOffice0(southAtlantic);
         final SalesOffice0 florida       = new SalesOffice0(southAtlantic);
@@ -79,6 +76,9 @@ public class OrganizationHierarchyTest {
         final SalesOffice0 louisiana = new SalesOffice0(westSouthCentral);
         final SalesOffice0 oklahoma  = new SalesOffice0(westSouthCentral);
         final SalesOffice0 texas     = new SalesOffice0(westSouthCentral);
+
+        final Division0 mountain = new Division0(west);
+        final Division0 pacific  = new Division0(west);
 
         final SalesOffice0 arizona   = new SalesOffice0(mountain);
         final SalesOffice0 colorado  = new SalesOffice0(mountain);
