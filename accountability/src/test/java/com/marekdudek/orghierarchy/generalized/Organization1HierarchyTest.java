@@ -13,6 +13,8 @@ public class Organization1HierarchyTest {
     @Test
     public void generic_multinational() {
 
+        // based on Census Bureau-designated regions and divisions
+
         final OperatingUnit1 us = new OperatingUnit1("United States");
 
         final Region1 northeast = new Region1(us, "Northeast");
@@ -55,7 +57,7 @@ public class Organization1HierarchyTest {
         final Division1 eastSouthCentral = new Division1(south, "East South Central");
         final Division1 westSouthCentral = new Division1(south, "West South Central");
 
-        final SalesOffice1 deleware      = new SalesOffice1(southAtlantic, "Deleware");
+        final SalesOffice1 delaware      = new SalesOffice1(southAtlantic, "Delaware");
         final SalesOffice1 florida       = new SalesOffice1(southAtlantic, "Florida");
         final SalesOffice1 georgia       = new SalesOffice1(southAtlantic, "Georgia");
         final SalesOffice1 maryland      = new SalesOffice1(southAtlantic, "Maryland");
@@ -96,7 +98,7 @@ public class Organization1HierarchyTest {
         final Collection<SalesOffice1> offices = Arrays.asList(
                 alabama, alaska, arizona, arkansas,
                 california, colorado, connecticut,
-                deleware, florida, georgia, hawaii,
+                delaware, florida, georgia, hawaii,
                 idaho, illinois, indiana, iowa,
                 kansas, kentucky, louisiana,
                 maine, maryland, massachusetts, michigan, minnesota, mississippi, missouri, montana,
@@ -111,5 +113,31 @@ public class Organization1HierarchyTest {
 
         assertThat(offices, hasSize(51));
 
+        final HierarchyDisplayBuilder visitor = new HierarchyDisplayBuilder();
+        us.accept(visitor);
+
+        // System.out.println(visitor.hierarchy.toString());
+    }
+
+    private class HierarchyDisplayBuilder implements Visitor1 {
+
+        StringBuilder hierarchy = new StringBuilder();
+
+        @Override
+        public void visit(final Organization1 organization1) {
+
+            if (organization1 instanceof OperatingUnit1)
+                hierarchy.append("+ ");
+            if (organization1 instanceof Region1)
+                hierarchy.append("  + ");
+            if (organization1 instanceof Division1)
+                hierarchy.append("    + ");
+            if (organization1 instanceof SalesOffice1)
+                hierarchy.append("      + ");
+
+            hierarchy.
+                    append(organization1.getName()).
+                    append(String.format("%n"));
+        }
     }
 }

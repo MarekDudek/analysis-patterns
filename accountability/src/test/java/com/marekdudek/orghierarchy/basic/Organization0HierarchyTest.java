@@ -57,7 +57,7 @@ public class Organization0HierarchyTest {
         final Division0 eastSouthCentral = new Division0(south, "East South Central");
         final Division0 westSouthCentral = new Division0(south, "West South Central");
 
-        final SalesOffice0 deleware      = new SalesOffice0(southAtlantic, "Deleware");
+        final SalesOffice0 delaware      = new SalesOffice0(southAtlantic, "Delaware");
         final SalesOffice0 florida       = new SalesOffice0(southAtlantic, "Florida");
         final SalesOffice0 georgia       = new SalesOffice0(southAtlantic, "Georgia");
         final SalesOffice0 maryland      = new SalesOffice0(southAtlantic, "Maryland");
@@ -98,7 +98,7 @@ public class Organization0HierarchyTest {
         final Collection<SalesOffice0> offices = Arrays.asList(
                 alabama, alaska, arizona, arkansas,
                 california, colorado, connecticut,
-                deleware, florida, georgia, hawaii,
+                delaware, florida, georgia, hawaii,
                 idaho, illinois, indiana, iowa,
                 kansas, kentucky, louisiana,
                 maine, maryland, massachusetts, michigan, minnesota, mississippi, missouri, montana,
