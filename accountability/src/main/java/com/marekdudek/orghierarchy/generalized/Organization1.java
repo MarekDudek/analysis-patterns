@@ -22,9 +22,6 @@ abstract class Organization1 implements Acceptor1 {
 
     public abstract void ensureParentConstraint(final Organization1 parent);
 
-    class HierarchyInvariantViolation extends RuntimeException {
-    }
-
     @Override
     public final void accept(final Visitor1 visitor) {
         visitor.visit(this);

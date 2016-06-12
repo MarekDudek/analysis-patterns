@@ -1,8 +1,8 @@
 package com.marekdudek.orghierarchy.generalized;
 
-import com.google.common.base.Preconditions;
-
 import java.util.ArrayList;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 class OperatingUnit1 extends Organization1 {
 
@@ -12,6 +12,6 @@ class OperatingUnit1 extends Organization1 {
 
     @Override
     public void ensureParentConstraint(final Organization1 parent) {
-        Preconditions.checkArgument(parent == null);
+        checkArgument(parent == null);
     }
 }

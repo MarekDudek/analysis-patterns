@@ -1,6 +1,7 @@
 package com.marekdudek.orghierarchy.generalized;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 class SalesOffice1 extends Organization1 {
 
@@ -10,7 +11,7 @@ class SalesOffice1 extends Organization1 {
 
     @Override
     public void ensureParentConstraint(final Organization1 parent) {
-        Preconditions.checkNotNull(parent);
-        Preconditions.checkArgument(parent instanceof Division1);
+        checkNotNull(parent);
+        checkArgument(parent instanceof Division1);
     }
 }
