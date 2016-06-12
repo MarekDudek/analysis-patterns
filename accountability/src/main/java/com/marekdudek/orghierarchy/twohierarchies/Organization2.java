@@ -2,7 +2,7 @@ package com.marekdudek.orghierarchy.twohierarchies;
 
 import java.util.Collection;
 
-abstract class Organization2 {
+abstract class Organization2 implements Acceptor2 {
 
     private String name;
 
@@ -20,14 +20,26 @@ abstract class Organization2 {
 
         salesParent = salesP;
         salesSubsidiaries = salesSubs;
-        if (salesParent != null) {
+        if (salesParent != null)
             salesParent.salesSubsidiaries.add(this);
-        }
 
         serviceParent = serviceP;
         serviceSubsidiaries = serviceSubs;
-        if (serviceParent != null) {
+        if (serviceParent != null)
             serviceParent.serviceSubsidiaries.add(this);
-        }
+    }
+
+    @Override
+    public void salesAccept(final Visitor2 visitor) {
+        visitor.visit(this);
+        if (salesSubsidiaries != null)
+            salesSubsidiaries.forEach(s -> s.salesAccept(visitor));
+    }
+
+    @Override
+    public void serviceAccept(final Visitor2 visitor) {
+        visitor.visit(this);
+        if (serviceSubsidiaries != null)
+            serviceSubsidiaries.forEach(s -> s.serviceAccept(visitor));
     }
 }

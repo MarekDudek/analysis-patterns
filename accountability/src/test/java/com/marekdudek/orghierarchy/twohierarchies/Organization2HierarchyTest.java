@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class Organization2HierarchyTest {
@@ -113,28 +113,70 @@ public class Organization2HierarchyTest {
         );
 
         assertThat(offices, hasSize(51));
+
+        final Counter counter = new Counter();
+        us.salesAccept(counter);
+
+        assertThat(counter.counter, is(equalTo(65)));
     }
 
     @Test
     public void generic_multinational_service_hierarchy() {
 
-        final ProductTypeServiceDivision coffee =
-                new ProductTypeServiceDivision("Coffee products service division");
+        // given
+        final ProductTypeServiceDivision    coffee            = new ProductTypeServiceDivision("Coffee products service division");
+        final ProductSubtypeServiceDivision highVolumeItalian = new ProductSubtypeServiceDivision(coffee, "High-volume Italian coffee products service division");
+        final ProductFamilyServiceTeam      family217x        = new ProductFamilyServiceTeam(highVolumeItalian, "217x family service center");
+        new ProductServiceTeam(family217x, null, "2176 Boston");
 
-        final ProductSubtypeServiceDivision highVolumeItalian =
-                new ProductSubtypeServiceDivision(coffee, "High-volume Italian coffee products service division");
+        // when
+        final Counter counter = new Counter();
+        coffee.serviceAccept(counter);
 
-        final ProductFamilyServiceTeam family217x =
-                new ProductFamilyServiceTeam(highVolumeItalian, "217x family service center");
-
-        final ProductServiceTeam boston2176 =
-                new ProductServiceTeam(family217x, "2176 Boston");
-
-        // System.out.println(coffee);
+        // then
+        assertThat(counter.counter, is(equalTo(4)));
     }
 
     @Test
     public void generic_multinational() {
 
+        // given
+
+        // sales hierarchy
+        final OperatingUnit2 us            = new OperatingUnit2("United States");
+        final Region2        northeast     = new Region2(us, "Northeast");
+        final Division2      newEngland    = new Division2(northeast, "New England");
+        final SalesOffice2   massachusetts = new SalesOffice2(newEngland, "Massachusetts");
+        // service hierarchy
+        final ProductTypeServiceDivision    coffee            = new ProductTypeServiceDivision("Coffee products service division");
+        final ProductSubtypeServiceDivision highVolumeItalian = new ProductSubtypeServiceDivision(coffee, "High-volume Italian coffee products service division");
+        final ProductFamilyServiceTeam      family217x        = new ProductFamilyServiceTeam(highVolumeItalian, "217x family service center");
+        // organization with two hierarchies
+        new ProductServiceTeam(family217x, massachusetts, "2176 Boston");
+
+        // when
+        final Counter salesCounter = new Counter();
+        coffee.serviceAccept(salesCounter);
+
+        // then
+        assertThat(salesCounter.counter, is(equalTo(4)));
+
+        // when
+        final Counter serviceCounter = new Counter();
+        coffee.serviceAccept(serviceCounter);
+
+        // then
+        assertThat(serviceCounter.counter, is(equalTo(4)));
+
+    }
+
+    private class Counter implements Visitor2 {
+
+        int counter = 0;
+
+        @Override
+        public void visit(final Organization2 org) {
+            counter++;
+        }
     }
 }
