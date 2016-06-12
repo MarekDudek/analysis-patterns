@@ -9,15 +9,25 @@ abstract class Organization2 {
     private Organization2             salesParent;
     private Collection<Organization2> salesSubsidiaries;
 
-    private Organization2             productParent;
-    private Collection<Organization2> productSubsidiaries;
+    private Organization2             serviceParent;
+    private Collection<Organization2> serviceSubsidiaries;
 
-    Organization2(final String n, final Organization2 sp, final Collection<Organization2> ssubs) {
+    Organization2(final String n,
+                  final Organization2 salesP, final Collection<Organization2> salesSubs,
+                  final Organization2 serviceP, final Collection<Organization2> serviceSubs) {
+
         name = n;
-        salesParent = sp;
-        salesSubsidiaries = ssubs;
+
+        salesParent = salesP;
+        salesSubsidiaries = salesSubs;
         if (salesParent != null) {
             salesParent.salesSubsidiaries.add(this);
+        }
+
+        serviceParent = serviceP;
+        serviceSubsidiaries = serviceSubs;
+        if (serviceParent != null) {
+            serviceParent.serviceSubsidiaries.add(this);
         }
     }
 }

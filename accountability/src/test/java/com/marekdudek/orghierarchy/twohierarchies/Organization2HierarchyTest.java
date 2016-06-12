@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public class Organization2HierarchyTest {
 
     @Test
-    public void generic_multinational() {
+    public void generic_multinational_sales_hierarchy() {
 
         // based on Census Bureau-designated regions and divisions
 
@@ -109,8 +109,32 @@ public class Organization2HierarchyTest {
                 tennessee, texas,
                 utah, vermont, virginia,
                 washington, westVirginia, wisconsin, wyoming,
-                washingtonDc);
+                washingtonDc
+        );
 
         assertThat(offices, hasSize(51));
+    }
+
+    @Test
+    public void generic_multinational_service_hierarchy() {
+
+        final ProductTypeServiceDivision coffee =
+                new ProductTypeServiceDivision("Coffee products service division");
+
+        final ProductSubtypeServiceDivision highVolumeItalian =
+                new ProductSubtypeServiceDivision(coffee, "High-volume Italian coffee products service division");
+
+        final ProductFamilyServiceTeam family217x =
+                new ProductFamilyServiceTeam(highVolumeItalian, "217x family service center");
+
+        final ProductServiceTeam boston2176 =
+                new ProductServiceTeam(family217x, "2176 Boston");
+
+        // System.out.println(coffee);
+    }
+
+    @Test
+    public void generic_multinational() {
+
     }
 }
