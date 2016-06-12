@@ -14,4 +14,9 @@ class SalesOffice1 extends Organization1 {
         checkNotNull(parent);
         checkArgument(parent instanceof Division1);
     }
+
+    @Override
+    public void ensureSubsidiaryConstraint(final Organization1 subsidiary) {
+        checkArgument(false);
+    }
 }
