@@ -7,7 +7,7 @@ import org.junit.rules.ExpectedException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class Organization1HierarchyTest {
@@ -186,5 +186,21 @@ public class Organization1HierarchyTest {
         exc.expect(IllegalArgumentException.class);
         // when
         office.setParent(office);
+    }
+
+    @Test
+    public void moving_region_to_different_operating_unit() {
+        // given
+        final OperatingUnit1 unit1  = new OperatingUnit1("original");
+        final OperatingUnit1 unit2  = new OperatingUnit1("new");
+        final Region1        region = new Region1(unit1, "region");
+        // then
+        assertThat(unit1.getSubsidiaries(), is(not(empty())));
+        assertThat(unit2.getSubsidiaries(), is(empty()));
+        // when
+        region.setParent(unit2);
+        // then
+        assertThat(unit2.getSubsidiaries(), is(not(empty())));
+        assertThat(unit1.getSubsidiaries(), is(empty()));
     }
 }

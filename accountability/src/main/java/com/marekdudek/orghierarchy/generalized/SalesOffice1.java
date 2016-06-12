@@ -6,7 +6,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 class SalesOffice1 extends Organization1 {
 
     SalesOffice1(final Division1 division, final String name) {
-        super(division, name, null);
+        super(division, name);
     }
 
     @Override
@@ -16,7 +16,12 @@ class SalesOffice1 extends Organization1 {
     }
 
     @Override
-    public void ensureSubsidiaryConstraint(final Organization1 subsidiary) {
-        checkArgument(false);
+    public boolean canHaveSubsidiaries() {
+        return false;
+    }
+
+    @Override
+    public void ensureSubsidiaryTypeConstraint(final Organization1 subsidiary) {
+        checkArgument(canHaveSubsidiaries());
     }
 }

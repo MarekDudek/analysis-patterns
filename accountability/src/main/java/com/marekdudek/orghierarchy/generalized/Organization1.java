@@ -1,5 +1,7 @@
 package com.marekdudek.orghierarchy.generalized;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 abstract class Organization1 implements Acceptor1 {
@@ -8,19 +10,18 @@ abstract class Organization1 implements Acceptor1 {
     private Organization1      parent;
     private Set<Organization1> subsidiaries;
 
-    // Constraints on types of parents and subsidiaries enforced by specific constructors
-
-    Organization1(final Organization1 p, final String n, final Set<Organization1> subs) {
+    Organization1(final Organization1 p, final String n) {
         name = n;
         setParent(p);
-        subsidiaries = subs;
-        if (subsidiaries != null)
-            subsidiaries.forEach(this::ensureSubsidiaryConstraint);
+        if (canHaveSubsidiaries())
+            subsidiaries = new HashSet<>();
     }
 
-    public abstract void ensureParentConstraint(final Organization1 parent);
+    public abstract void ensureParentConstraint(Organization1 parent);
 
-    public abstract void ensureSubsidiaryConstraint(final Organization1 subsidiary);
+    public abstract boolean canHaveSubsidiaries();
+
+    public abstract void ensureSubsidiaryTypeConstraint(Organization1 subsidiary);
 
     @Override
     public final void accept(final Visitor1 visitor) {
@@ -32,10 +33,16 @@ abstract class Organization1 implements Acceptor1 {
     public final void setParent(final Organization1 p) {
         ensureParentConstraint(p);
         if (p != null)
-            p.ensureSubsidiaryConstraint(this);
+            p.ensureSubsidiaryTypeConstraint(this);
+        if (parent != null)
+            parent.subsidiaries.remove(this);
         parent = p;
         if (parent != null)
             parent.subsidiaries.add(this);
+    }
+
+    public Set<Organization1> getSubsidiaries() {
+        return Collections.unmodifiableSet(subsidiaries);
     }
 
     public void setName(final String n) {
