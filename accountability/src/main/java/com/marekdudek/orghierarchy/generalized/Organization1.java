@@ -11,12 +11,18 @@ abstract class Organization1 implements Acceptor1 {
     // Constraints on types of parents and subsidiaries enforced by specific constructors
 
     Organization1(final Organization1 p, final String n, final Collection<Organization1> subs) {
+        ensureParentConstraint(p);
         parent = p;
         name = n;
         subsidiaries = subs;
         if (parent != null) {
             parent.subsidiaries.add(this);
         }
+    }
+
+    public abstract void ensureParentConstraint(final Organization1 parent);
+
+    class HierarchyInvariantViolation extends RuntimeException {
     }
 
     @Override
@@ -26,7 +32,20 @@ abstract class Organization1 implements Acceptor1 {
             subsidiaries.forEach(s -> s.accept(visitor));
     }
 
-    String getName() {
+    public void setParent(final Organization1 p) {
+        ensureParentConstraint(p);
+        parent = p;
+    }
+
+    public void setName(final String n) {
+        name = n;
+    }
+
+    public String getName() {
         return name;
+    }
+
+    public Organization1 getParent() {
+        return parent;
     }
 }

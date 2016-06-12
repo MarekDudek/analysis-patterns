@@ -1,6 +1,8 @@
 package com.marekdudek.orghierarchy.generalized;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -139,5 +141,50 @@ public class Organization1HierarchyTest {
                     append(organization1.getName()).
                     append(String.format("%n"));
         }
+    }
+
+    @Rule
+    public ExpectedException exc = ExpectedException.none();
+
+    @Test
+    public void operating_unit_must_not_have_parent() {
+        // given
+        final OperatingUnit1 unit = new OperatingUnit1("unit");
+        // then
+        exc.expect(IllegalArgumentException.class);
+        // when
+        unit.setParent(unit);
+    }
+
+    @Test
+    public void region_must_have_parent_operating_unit() {
+        // given
+        final Region1 region = new Region1(new OperatingUnit1("unit"), "region");
+        // then
+        exc.expect(IllegalArgumentException.class);
+        // when
+        region.setParent(region);
+    }
+
+    @Test
+    public void division_must_have_parent_region() {
+        // given
+        final Division1 division =
+                new Division1(new Region1(new OperatingUnit1("unit"), "region"), "division");
+        // then
+        exc.expect(IllegalArgumentException.class);
+        // when
+        division.setParent(division);
+    }
+
+    @Test
+    public void sales_office_must_have_parent_division() {
+        // given
+        final SalesOffice1 office =
+                new SalesOffice1(new Division1(new Region1(new OperatingUnit1("unit"), "region"), "division"), "office");
+        // then
+        exc.expect(IllegalArgumentException.class);
+        // when
+        office.setParent(office);
     }
 }
