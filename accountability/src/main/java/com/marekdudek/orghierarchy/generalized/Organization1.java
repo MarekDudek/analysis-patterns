@@ -9,7 +9,7 @@ abstract class Organization1 implements Acceptor1 {
     private Collection<Organization1> subsidiaries;
 
     // Constraints on types of parents and subsidiaries enforced by specific constructors
-    
+
     Organization1(final Organization1 p, final String n, final Collection<Organization1> subs) {
         parent = p;
         name = n;
