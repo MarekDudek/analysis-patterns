@@ -1,19 +1,23 @@
 package com.marekdudek.orgstructure.basic;
 
-import java.time.Period;
-
 public class OrganizationStructure3 {
 
-    private final Organization3              organization;
-    private final OrganizationStructureType3 type;
-    private       Period                     period;
+    private final Organization3 parent;
+    private final Organization3 subsidiary;
 
-    public OrganizationStructure3(final Organization3 org, final OrganizationStructureType3 t) {
-        organization = org;
-        type = t;
+    private final OrganizationStructureType3 type;
+
+    public OrganizationStructure3(final Organization3 parent, final Organization3 subsidiary, final OrganizationStructureType3 type) {
+        this.parent = parent;
+        this.subsidiary = subsidiary;
+        this.type = type;
     }
 
-    public Organization3 getOrganization() {
-        return organization;
+    public Organization3 getParent() {
+        return parent;
+    }
+
+    public Organization3 getSubsidiary() {
+        return subsidiary;
     }
 }
