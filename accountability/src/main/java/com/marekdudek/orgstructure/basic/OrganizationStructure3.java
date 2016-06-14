@@ -4,12 +4,16 @@ import java.time.Period;
 
 public class OrganizationStructure3 {
 
-    private Organization3              organization;
-    private OrganizationStructureType3 type;
-    private Period                     period;
+    private final Organization3              organization;
+    private final OrganizationStructureType3 type;
+    private       Period                     period;
 
     public OrganizationStructure3(final Organization3 org, final OrganizationStructureType3 t) {
         organization = org;
         type = t;
+    }
+
+    public Organization3 getOrganization() {
+        return organization;
     }
 }
