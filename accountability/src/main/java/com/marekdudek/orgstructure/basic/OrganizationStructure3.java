@@ -1,5 +1,8 @@
 package com.marekdudek.orgstructure.basic;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class OrganizationStructure3 {
 
     private final Organization3 parent;

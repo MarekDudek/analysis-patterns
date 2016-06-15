@@ -7,4 +7,8 @@ public class SalesOffice3 extends Organization3 {
     public SalesOffice3(final Organization3 parent, final String name) {
         super(parent, SALES, name);
     }
+
+    public SalesOffice3(final String name) {
+        this(null, name);
+    }
 }

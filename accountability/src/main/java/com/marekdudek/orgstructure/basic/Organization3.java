@@ -16,20 +16,29 @@ public class Organization3 {
     private Map<OrganizationStructureType3, Set<OrganizationStructure3>> subsidiaries = new HashMap<>();
 
     public Organization3(final Organization3 parent, final OrganizationStructureType3 type, final String name) {
-
         this.name = name;
+        setParent(parent, type);
+    }
 
-        if (parent != null) {
+    public void setParent(final Organization3 parent, final OrganizationStructureType3 type) {
 
-            final OrganizationStructure3 structure = new OrganizationStructure3(parent, this, type);
+        if (parent == null)
+            return;
 
-            parents.put(type, structure);
-
-            final Set<OrganizationStructure3> subs = parent.subsidiaries.get(type);
-            if (subs == null)
-                parent.subsidiaries.put(type, new HashSet<>());
-            parent.subsidiaries.get(type).add(structure);
+        final Organization3 previousParent = getParent(type);
+        if (previousParent != null) {
+            final Set<OrganizationStructure3> subs = previousParent.subsidiaries.get(type);
+            final OrganizationStructure3      prevStructure = new OrganizationStructure3(previousParent, this, type);
+            subs.remove(prevStructure);
         }
+
+        final OrganizationStructure3 structure = new OrganizationStructure3(parent, this, type);
+        parents.put(type, structure);
+
+        final Set<OrganizationStructure3> subs = parent.subsidiaries.get(type);
+        if (subs == null)
+            parent.subsidiaries.put(type, new HashSet<>());
+        parent.subsidiaries.get(type).add(structure);
     }
 
     public Organization3 getParent(final OrganizationStructureType3 type) {
@@ -44,4 +53,5 @@ public class Organization3 {
                 collect(toSet());
         return unmodifiableSet(subsidiaries);
     }
+
 }

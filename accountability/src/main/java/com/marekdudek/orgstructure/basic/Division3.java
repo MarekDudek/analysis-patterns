@@ -7,4 +7,8 @@ public class Division3 extends Organization3 {
     public Division3(final Organization3 parent, final String name) {
         super(parent, SALES, name);
     }
+
+    public Division3(final String name) {
+        this(null, name);
+    }
 }
